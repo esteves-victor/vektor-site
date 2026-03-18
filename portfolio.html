@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfólio — Vektor</title>
+<meta name="description" content="Cases reais de sites, automações e sistemas entregues. Resultados concretos para negócios reais.">
+<link rel="stylesheet" href="style.css">
+<style>
+/* PAGE HEADER */
+.page-header {
+  padding: 80px 0 72px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* FILTER TABS */
+.filter-tabs {
+  display: flex; gap: 2px; flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.filter-btn {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 10px 18px;
+  background: var(--panel); border: none;
+  color: var(--muted2); cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: var(--panel2); color: var(--accent);
+}
+
+/* CASES GRID */
+.cases-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+}
+
+.case-card {
+  background: var(--panel);
+  position: relative; overflow: hidden;
+  transition: background 0.25s;
+}
+.case-card:hover { background: var(--panel2); }
+
+.case-thumb {
+  width: 100%; aspect-ratio: 16/9;
+  background: var(--dark);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+
+/* SVG Mockup thumbnails */
+.mock-browser {
+  width: 85%; height: 85%;
+}
+
+.case-body { padding: 32px; }
+
+.case-tags {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.case-title {
+  font-family: var(--mono); font-size: 18px;
+  font-weight: 700; color: var(--white);
+  margin-bottom: 10px;
+}
+
+.case-desc {
+  font-size: 13px; color: var(--muted2);
+  line-height: 1.65; margin-bottom: 24px;
+}
+
+.case-results {
+  display: flex; gap: 24px; flex-wrap: wrap;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.result-item { }
+.result-val {
+  font-family: var(--mono); font-size: 22px;
+  font-weight: 700; color: var(--accent);
+  line-height: 1;
+}
+.result-label {
+  font-family: var(--mono); font-size: 9px;
+  color: var(--muted); letter-spacing: 0.12em;
+  text-transform: uppercase; margin-top: 4px;
+}
+
+/* FEATURED (wide) */
+.case-card.wide { grid-column: span 2; }
+.case-card.wide .case-thumb { aspect-ratio: 21/9; }
+.case-card.wide .case-body {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 40px; align-items: start;
+}
+.case-card.wide .case-results { flex-direction: column; gap: 16px; min-width: 160px; }
+.case-card.wide .result-val { font-size: 28px; }
+
+/* TESTIMONY */
+.testimony {
+  margin-top: 2px;
+  background: var(--panel);
+  padding: 48px 40px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+.test-item {
+  background: var(--panel2); padding: 32px;
+}
+.test-quote {
+  font-size: 15px; color: var(--white);
+  line-height: 1.7; margin-bottom: 20px;
+  font-style: italic;
+}
+.test-quote::before { content: '"'; color: var(--accent); font-size: 32px; line-height: 0; vertical-align: -14px; margin-right: 6px; }
+.test-author {
+  font-family: var(--mono); font-size: 10px;
+  color: var(--muted); letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.test-author span { color: var(--white); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .cases-grid { grid-template-columns: 1fr; }
+  .case-card.wide { grid-column: span 1; }
+  .case-card.wide .case-body { grid-template-columns: 1fr; gap: 20px; }
+  .case-card.wide .case-results { flex-direction: row; }
+  .testimony { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .case-body { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg viewBox="0 0 26 26" fill="none">
+        <rect x="0.75" y="0.75" width="24.5" height="24.5" rx="3" stroke="#00d4ff" stroke-width="1.2"/>
+        <path d="M6 18L10.5 8.5L15 14L18.5 8.5" stroke="#00d4ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="18.5" cy="8.5" r="1.8" fill="#0057ff"/>
+      </svg>
+      <span class="nav-wordmark">VEKTOR</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="servicos.html">Serviços</a></li>
+      <li><a href="portfolio.html" class="active">Portfólio</a></li>
+      <li><a href="contato.html">Contato</a></li>
+      <li><a href="contato.html" class="nav-cta">Fale Comigo</a></li>
+    </ul>
+    <div class="nav-toggle" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<main>
+  <div class="page-header">
+    <div class="container">
+      <div class="s-label reveal">Projetos Entregues</div>
+      <h1 class="s-title reveal">Trabalho real.<br>Resultado concreto.</h1>
+      <p class="s-subtitle reveal" style="margin-top:16px;">Cada projeto é único. Aqui estão alguns dos trabalhos entregues — desde sistemas de reservas até presença digital completa.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+
+      <div class="filter-tabs reveal">
+        <button class="filter-btn active" onclick="filterCases(this, 'all')">Todos</button>
+        <button class="filter-btn" onclick="filterCases(this, 'site')">Sites</button>
+        <button class="filter-btn" onclick="filterCases(this, 'automacao')">Automação</button>
+        <button class="filter-btn" onclick="filterCases(this, 'sistema')">Sistemas</button>
+      </div>
+
+      <div class="cases-grid" id="casesGrid">
+
+        <!-- CASE 1 — Lorrany Espaço Fest (wide/featured) -->
+        <div class="case-card wide reveal" data-cat="sistema site">
+          <div class="case-thumb">
+            <!-- SVG mockup de sistema de reservas -->
+            <svg class="mock-browser" viewBox="0 0 760 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="760" height="340" fill="#111"/>
+              <!-- Barra nav -->
+              <rect width="760" height="36" fill="#161616"/>
+              <circle cx="16" cy="18" r="5" fill="#ff5f57"/>
+              <circle cx="32" cy="18" r="5" fill="#febc2e"/>
+              <circle cx="48" cy="18" r="5" fill="#28c840"/>
+              <rect x="180" y="10" width="400" height="16" rx="8" fill="#1c1c1c"/>
+              <!-- Sidebar -->
+              <rect x="0" y="36" width="160" height="304" fill="#161616"/>
+              <rect x="12" y="56" width="136" height="12" rx="2" fill="#222"/>
+              <rect x="12" y="78" width="100" height="10" rx="2" fill="#1c1c1c"/>
+              <rect x="12" y="98" width="118" height="10" rx="2" fill="#00d4ff" opacity="0.2"/>
+              <rect x="12" y="118" width="110" height="10" rx="2" fill="#1c1c1c"/>
+              <rect x="12" y="138" width="96" height="10" rx="2" fill="#1c1c1c"/>
+              <!-- Content -->
+              <rect x="176" y="52" width="560" height="24" rx="3" fill="#1c1c1c"/>
+              <!-- Cards reserva -->
+              <rect x="176" y="88" width="170" height="90" rx="3" fill="#1c1c1c"/>
+              <rect x="186" y="98" width="60" height="8" rx="2" fill="#00d4ff" opacity="0.6"/>
+              <rect x="186" y="114" width="130" height="6" rx="2" fill="#222"/>
+              <rect x="186" y="128" width="100" height="6" rx="2" fill="#222"/>
+              <rect x="186" y="156" width="70" height="14" rx="2" fill="#0057ff"/>
+              <rect x="356" y="88" width="170" height="90" rx="3" fill="#1c1c1c"/>
+              <rect x="366" y="98" width="60" height="8" rx="2" fill="#00d4ff" opacity="0.6"/>
+              <rect x="366" y="114" width="130" height="6" rx="2" fill="#222"/>
+              <rect x="366" y="128" width="100" height="6" rx="2" fill="#222"/>
+              <rect x="366" y="156" width="70" height="14" rx="2" fill="#222"/>
+              <rect x="536" y="88" width="200" height="210" rx="3" fill="#161616"/>
+              <rect x="546" y="104" width="80" height="10" rx="2" fill="#00d4ff" opacity="0.4"/>
+              <rect x="546" y="124" width="160" height="80" rx="2" fill="#1c1c1c"/>
+              <!-- Calendar grid -->
+              <rect x="556" y="134" width="16" height="16" rx="2" fill="#222"/>
+              <rect x="578" y="134" width="16" height="16" rx="2" fill="#222"/>
+              <rect x="600" y="134" width="16" height="16" rx="2" fill="#0057ff"/>
+              <rect x="622" y="134" width="16" height="16" rx="2" fill="#222"/>
+              <rect x="644" y="134" width="16" height="16" rx="2" fill="#222"/>
+              <rect x="556" y="158" width="16" height="16" rx="2" fill="#222"/>
+              <rect x="578" y="158" width="16" height="16" rx="2" fill="#00d4ff" opacity="0.5"/>
+              <rect x="600" y="158" width="16" height="16" rx="2" fill="#222"/>
+              <rect x="622" y="158" width="16" height="16" rx="2" fill="#222"/>
+              <rect x="644" y="158" width="16" height="16" rx="2" fill="#222"/>
+              <rect x="176" y="192" width="344" height="106" rx="3" fill="#161616"/>
+              <rect x="186" y="204" width="100" height="8" rx="2" fill="#888" opacity="0.5"/>
+              <rect x="186" y="220" width="280" height="8" rx="2" fill="#1c1c1c"/>
+              <rect x="186" y="236" width="220" height="8" rx="2" fill="#1c1c1c"/>
+              <rect x="186" y="252" width="250" height="8" rx="2" fill="#1c1c1c"/>
+              <rect x="186" y="268" width="180" height="8" rx="2" fill="#1c1c1c"/>
+            </svg>
+          </div>
+          <div class="case-body">
+            <div>
+              <div class="case-tags">
+                <span class="tag accent">Sistema</span>
+                <span class="tag">Site</span>
+                <span class="tag">Supabase</span>
+              </div>
+              <div class="case-title">Lorrany Espaço Fest</div>
+              <div class="case-desc">Sistema completo de reservas e cotações para espaço de eventos. Inclui dashboard administrativo, controle de disponibilidade por calendário, notificações automáticas por e-mail, políticas de segurança RLS e redesign completo da paleta de cores.</div>
+            </div>
+            <div class="case-results">
+              <div class="result-item">
+                <div class="result-val">100%</div>
+                <div class="result-label">Reservas online</div>
+              </div>
+              <div class="result-item">
+                <div class="result-val">0</div>
+                <div class="result-label">Conflitos de agenda</div>
+              </div>
+              <div class="result-item">
+                <div class="result-val">Auto</div>
+                <div class="result-label">Notificações</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CASE 2 — FORMA Nuvemshop -->
+        <div class="case-card reveal" data-cat="site">
+          <div class="case-thumb">
+            <svg class="mock-browser" viewBox="0 0 400 225" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="400" height="225" fill="#0d0d0d"/>
+              <rect width="400" height="24" fill="#1a1a1a"/>
+              <circle cx="10" cy="12" r="3.5" fill="#ff5f57"/>
+              <circle cx="22" cy="12" r="3.5" fill="#febc2e"/>
+              <circle cx="34" cy="12" r="3.5" fill="#28c840"/>
+              <!-- Hero produto -->
+              <rect x="0" y="24" width="200" height="201" fill="#1c1c1c"/>
+              <rect x="20" y="44" width="160" height="140" rx="4" fill="#252525"/>
+              <!-- Silhueta produto -->
+              <ellipse cx="100" cy="110" rx="40" ry="55" fill="#333"/>
+              <rect x="0" y="24" width="200" height="201" fill="url(#grad1)" opacity="0.3"/>
+              <defs>
+                <linearGradient id="grad1" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#e91e8c"/>
+                  <stop offset="1" stop-color="#ff6b6b" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <!-- Product info -->
+              <rect x="210" y="44" width="80" height="8" rx="2" fill="#e91e8c" opacity="0.7"/>
+              <rect x="210" y="60" width="160" height="12" rx="2" fill="#eee" opacity="0.8"/>
+              <rect x="210" y="80" width="130" height="8" rx="2" fill="#888" opacity="0.5"/>
+              <rect x="210" y="96" width="80" height="16" rx="2" fill="#eee" opacity="0.9"/>
+              <rect x="210" y="120" width="150" height="8" rx="2" fill="#555"/>
+              <rect x="210" y="134" width="120" height="8" rx="2" fill="#555"/>
+              <rect x="210" y="155" width="150" height="28" rx="3" fill="#e91e8c"/>
+              <rect x="210" y="191" width="150" height="24" rx="3" fill="#333"/>
+            </svg>
+          </div>
+          <div class="case-body">
+            <div class="case-tags">
+              <span class="tag accent">E-commerce</span>
+              <span class="tag">Nuvemshop</span>
+              <span class="tag">Theme Custom</span>
+            </div>
+            <div class="case-title">FORMA — Moda Fitness</div>
+            <div class="case-desc">Tema Nuvemshop construído do zero para marca de moda fitness feminina. Design elegante, foco em conversão, mobile-first.</div>
+            <div class="case-results">
+              <div class="result-item">
+                <div class="result-val">100%</div>
+                <div class="result-label">Custom theme</div>
+              </div>
+              <div class="result-item">
+                <div class="result-val">3×</div>
+                <div class="result-label">Velocidade vs. template</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CASE 3 — Marketing Digital -->
+        <div class="case-card reveal reveal-delay-1" data-cat="automacao">
+          <div class="case-thumb">
+            <svg class="mock-browser" viewBox="0 0 400 225" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="400" height="225" fill="#0a0a0a"/>
+              <rect width="400" height="24" fill="#161616"/>
+              <circle cx="10" cy="12" r="3.5" fill="#ff5f57"/>
+              <circle cx="22" cy="12" r="3.5" fill="#febc2e"/>
+              <circle cx="34" cy="12" r="3.5" fill="#28c840"/>
+              <!-- Dashboard -->
+              <rect x="10" y="34" width="85" height="50" rx="3" fill="#1c1c1c"/>
+              <rect x="18" y="42" width="40" height="6" rx="2" fill="#00d4ff" opacity="0.5"/>
+              <rect x="18" y="54" width="60" height="14" rx="2" fill="#eee" opacity="0.7"/>
+              <rect x="18" y="72" width="50" height="6" rx="2" fill="#28c840" opacity="0.6"/>
+
+              <rect x="105" y="34" width="85" height="50" rx="3" fill="#1c1c1c"/>
+              <rect x="113" y="42" width="40" height="6" rx="2" fill="#00d4ff" opacity="0.5"/>
+              <rect x="113" y="54" width="60" height="14" rx="2" fill="#eee" opacity="0.7"/>
+              <rect x="113" y="72" width="50" height="6" rx="2" fill="#ff9500" opacity="0.6"/>
+
+              <rect x="200" y="34" width="85" height="50" rx="3" fill="#1c1c1c"/>
+              <rect x="208" y="42" width="40" height="6" rx="2" fill="#00d4ff" opacity="0.5"/>
+              <rect x="208" y="54" width="60" height="14" rx="2" fill="#eee" opacity="0.7"/>
+              <rect x="208" y="72" width="50" height="6" rx="2" fill="#0057ff" opacity="0.6"/>
+
+              <rect x="295" y="34" width="95" height="50" rx="3" fill="#1c1c1c"/>
+              <rect x="303" y="42" width="40" height="6" rx="2" fill="#00d4ff" opacity="0.5"/>
+              <rect x="303" y="54" width="60" height="14" rx="2" fill="#eee" opacity="0.7"/>
+              <rect x="303" y="72" width="50" height="6" rx="2" fill="#e91e8c" opacity="0.6"/>
+
+              <!-- Chart -->
+              <rect x="10" y="94" width="240" height="120" rx="3" fill="#161616"/>
+              <polyline points="30,190 65,165 100,170 135,145 170,150 205,125 230,130" stroke="#00d4ff" stroke-width="2" fill="none"/>
+              <polyline points="30,200 65,185 100,188 135,172 170,176 205,158 230,162" stroke="#0057ff" stroke-width="2" fill="none" opacity="0.5"/>
+
+              <!-- Posts feed -->
+              <rect x="260" y="94" width="130" height="56" rx="3" fill="#1c1c1c"/>
+              <rect x="268" y="102" width="30" height="30" rx="2" fill="#252525"/>
+              <rect x="306" y="104" width="70" height="6" rx="2" fill="#888" opacity="0.6"/>
+              <rect x="306" y="116" width="55" height="6" rx="2" fill="#555"/>
+              <rect x="306" y="126" width="40" height="10" rx="2" fill="#28c840" opacity="0.7"/>
+
+              <rect x="260" y="158" width="130" height="56" rx="3" fill="#1c1c1c"/>
+              <rect x="268" y="166" width="30" height="30" rx="2" fill="#252525"/>
+              <rect x="306" y="168" width="70" height="6" rx="2" fill="#888" opacity="0.6"/>
+              <rect x="306" y="180" width="55" height="6" rx="2" fill="#555"/>
+              <rect x="306" y="190" width="40" height="10" rx="2" fill="#ff9500" opacity="0.7"/>
+            </svg>
+          </div>
+          <div class="case-body">
+            <div class="case-tags">
+              <span class="tag accent">Marketing Digital</span>
+              <span class="tag">Gestão de Redes</span>
+            </div>
+            <div class="case-title">Lava Rápido — SP</div>
+            <div class="case-desc">Estratégia de presença digital, criação de conteúdo e gestão de redes sociais para negócio local na fronteira SP/Osasco. Crescimento orgânico com foco em captação local.</div>
+            <div class="case-results">
+              <div class="result-item">
+                <div class="result-val">Ativo</div>
+                <div class="result-label">Cliente recorrente</div>
+              </div>
+              <div class="result-item">
+                <div class="result-val">+Local</div>
+                <div class="result-label">Alcance geográfico</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CASE 4 — Placeholder próximo projeto -->
+        <div class="case-card reveal reveal-delay-2" data-cat="automacao sistema" style="min-height:320px; display:flex; flex-direction:column;">
+          <div class="case-thumb" style="flex:1; background: linear-gradient(135deg, #0a0a0a 0%, #111 100%); align-items:center; justify-content:center; display:flex; flex-direction:column; gap:16px; padding:40px;">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <rect x="1" y="1" width="46" height="46" rx="5" stroke="#00d4ff" stroke-width="1.5" stroke-dasharray="4 3"/>
+              <path d="M24 16v16M16 24h16" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span style="font-family: var(--mono); font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color: var(--muted);">Seu projeto aqui</span>
+          </div>
+          <div class="case-body" style="flex:0;">
+            <div class="case-tags">
+              <span class="tag">Em aberto</span>
+            </div>
+            <div class="case-title">Próximo Case</div>
+            <div class="case-desc">Tem um projeto que pode se tornar um case de sucesso? Vamos construir juntos.</div>
+            <a href="contato.html" class="btn btn-outline" style="margin-top:8px; font-size:10px;">Falar sobre meu projeto →</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TESTIMONIALS -->
+      <div class="testimony reveal" style="margin-top:2px;">
+        <div class="test-item">
+          <p class="test-quote">O sistema de reservas transformou completamente como gerencio os eventos. Antes era tudo no WhatsApp e papel. Agora tudo é automático.</p>
+          <div class="test-author"><span>Lorrany</span> · Lorrany Espaço Fest</div>
+        </div>
+        <div class="test-item">
+          <p class="test-quote">Esperava meses para ter uma loja online profissional. Em semanas já estava funcionando com um tema que parece de grande marca.</p>
+          <div class="test-author"><span>Cliente FORMA</span> · E-commerce Fitness</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding: 80px 0; border-top: 1px solid var(--border);">
+    <div class="container" style="text-align:center;">
+      <h2 class="s-title reveal" style="margin-bottom:16px;">Seu negócio pode ser o próximo.</h2>
+      <p class="s-subtitle reveal" style="margin: 0 auto 36px; text-align:center;">Me conta o projeto. Vamos transformar isso em resultado.</p>
+      <a href="contato.html" class="btn btn-primary reveal">Começar um Projeto</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">
+      <svg width="20" height="20" viewBox="0 0 26 26" fill="none">
+        <rect x="0.75" y="0.75" width="24.5" height="24.5" rx="3" stroke="#00d4ff" stroke-width="1.2"/>
+        <path d="M6 18L10.5 8.5L15 14L18.5 8.5" stroke="#00d4ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="18.5" cy="8.5" r="1.8" fill="#0057ff"/>
+      </svg>
+      <span class="footer-wordmark">VEKTOR</span>
+    </a>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="servicos.html">Serviços</a></li>
+      <li><a href="portfolio.html">Portfólio</a></li>
+      <li><a href="contato.html">Contato</a></li>
+    </ul>
+    <span class="footer-copy">© 2026 Vektor</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/5511999999999?text=Olá!%20Vim%20pelo%20site%20da%20Vektor%20e%20quero%20saber%20mais." target="_blank" class="wa-float">
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+const cursor=document.querySelector('.cursor');
+const ring=document.querySelector('.cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+function animCursor(){cursor.style.left=mx+'px';cursor.style.top=my+'px';rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animCursor);}
+animCursor();
+
+function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}
+
+function filterCases(btn, cat) {
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.case-card').forEach(card => {
+    const c = card.dataset.cat || '';
+    card.style.display = (cat === 'all' || c.includes(cat)) ? '' : 'none';
+  });
+}
+
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

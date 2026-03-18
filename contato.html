@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contato — Vektor</title>
+<meta name="description" content="Me conta o projeto. Respondo em até 4 horas com uma proposta clara.">
+<link rel="stylesheet" href="style.css">
+<style>
+/* PAGE HEADER */
+.page-header {
+  padding: 80px 0 72px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* CONTACT LAYOUT */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 56px;
+  align-items: start;
+}
+
+/* FORM */
+.contact-form-wrap {
+  background: var(--panel);
+  padding: 48px 40px;
+}
+
+.form-title {
+  font-family: var(--mono); font-size: 13px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--white); margin-bottom: 32px;
+}
+
+.form-group { margin-bottom: 20px; }
+
+.form-group label {
+  display: block;
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background: var(--panel2);
+  border: 1px solid var(--border2);
+  color: var(--white);
+  font-family: var(--sans); font-size: 14px; font-weight: 300;
+  padding: 14px 16px;
+  outline: none;
+  transition: border-color 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--accent);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--muted);
+}
+
+.form-group textarea {
+  resize: vertical; min-height: 120px;
+}
+
+.form-group select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+.form-group select option {
+  background: var(--panel2);
+  color: var(--white);
+}
+
+.form-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+
+.form-submit {
+  margin-top: 8px;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 16px;
+  justify-content: center;
+  font-size: 11px;
+}
+
+.form-note {
+  font-family: var(--mono); font-size: 9px;
+  color: var(--muted); letter-spacing: 0.1em;
+  text-align: center; margin-top: 12px;
+}
+
+/* SUCCESS STATE */
+.form-success {
+  display: none; text-align: center;
+  padding: 40px 0;
+}
+.success-icon {
+  width: 56px; height: 56px;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+}
+.form-success h3 {
+  font-family: var(--mono); font-size: 16px; font-weight: 700;
+  color: var(--white); margin-bottom: 10px;
+}
+.form-success p { font-size: 14px; color: var(--muted2); }
+
+/* INFO PANEL */
+.contact-info { display: flex; flex-direction: column; gap: 2px; }
+
+.info-block {
+  background: var(--panel); padding: 32px;
+}
+
+.info-label {
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 12px;
+}
+
+.info-value {
+  font-family: var(--mono); font-size: 15px;
+  color: var(--white); font-weight: 700; margin-bottom: 6px;
+}
+
+.info-desc { font-size: 13px; color: var(--muted2); line-height: 1.6; }
+
+/* WhatsApp block */
+.wa-block {
+  background: #0d1f14;
+  border: 1px solid #1a3a22;
+  padding: 32px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.wa-top { display: flex; align-items: center; gap: 14px; }
+.wa-icon {
+  width: 44px; height: 44px;
+  background: #25d366;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.wa-icon svg { width: 22px; height: 22px; }
+.wa-title {
+  font-family: var(--mono); font-size: 13px; font-weight: 700;
+  color: var(--white);
+}
+.wa-sub { font-size: 12px; color: var(--muted2); margin-top: 2px; }
+.wa-desc { font-size: 13px; color: var(--muted2); line-height: 1.6; }
+.wa-btn {
+  background: #25d366; color: #000;
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 13px 20px;
+  text-decoration: none;
+  display: inline-flex; align-items: center; gap: 10px;
+  transition: background 0.2s;
+}
+.wa-btn:hover { background: #20bd5a; }
+
+/* SERVICES QUICK */
+.services-quick {
+  background: var(--panel); padding: 32px;
+}
+.services-quick-title {
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 16px;
+}
+.service-quick-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.service-quick-list li {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 13px; color: var(--muted2);
+  padding-bottom: 8px; border-bottom: 1px solid var(--border);
+}
+.service-quick-list li:last-child { border-bottom: none; padding-bottom: 0; }
+.service-quick-list .price { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .contact-form-wrap { padding: 32px 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg viewBox="0 0 26 26" fill="none">
+        <rect x="0.75" y="0.75" width="24.5" height="24.5" rx="3" stroke="#00d4ff" stroke-width="1.2"/>
+        <path d="M6 18L10.5 8.5L15 14L18.5 8.5" stroke="#00d4ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="18.5" cy="8.5" r="1.8" fill="#0057ff"/>
+      </svg>
+      <span class="nav-wordmark">VEKTOR</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="servicos.html">Serviços</a></li>
+      <li><a href="portfolio.html">Portfólio</a></li>
+      <li><a href="contato.html" class="active">Contato</a></li>
+      <li><a href="contato.html" class="nav-cta">Fale Comigo</a></li>
+    </ul>
+    <div class="nav-toggle" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<main>
+
+  <div class="page-header">
+    <div class="container">
+      <div class="s-label reveal">Fale Comigo</div>
+      <h1 class="s-title reveal">Vamos construir<br>algo real.</h1>
+      <p class="s-subtitle reveal" style="margin-top:16px;">Me conta o projeto. Respondo em até 4 horas com uma proposta clara e escopo definido.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- FORM -->
+        <div class="contact-form-wrap reveal">
+          <div class="form-title">Solicitar Orçamento</div>
+
+          <!--
+            INSTRUÇÃO: Troque o action abaixo pelo seu endpoint do Formspree.
+            1. Acesse https://formspree.io e crie uma conta gratuita
+            2. Crie um novo Form e copie o endpoint (https://formspree.io/f/XXXXXXXX)
+            3. Cole no lugar do action abaixo
+          -->
+          <form id="contactForm" action="https://formspree.io/f/SEU_ID_AQUI" method="POST" onsubmit="handleSubmit(event)">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Nome</label>
+                <input type="text" name="nome" placeholder="Seu nome" required>
+              </div>
+              <div class="form-group">
+                <label>WhatsApp</label>
+                <input type="tel" name="whatsapp" placeholder="(11) 99999-9999">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>E-mail</label>
+              <input type="email" name="email" placeholder="seu@email.com" required>
+            </div>
+
+            <div class="form-group">
+              <label>Serviço de interesse</label>
+              <select name="servico" required>
+                <option value="" disabled selected>Selecione um serviço</option>
+                <option value="landing">Landing Page (a partir de R$ 800)</option>
+                <option value="site">Site Institucional (a partir de R$ 1.500)</option>
+                <option value="automacao">Automação (a partir de R$ 500)</option>
+                <option value="ia">Agente com IA (a partir de R$ 1.500)</option>
+                <option value="outro">Outro / Não sei ainda</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Conte sobre o projeto</label>
+              <textarea name="mensagem" placeholder="O que você precisa? Qual o objetivo do projeto? Tem prazo ou orçamento em mente?" required></textarea>
+            </div>
+
+            <div class="form-submit">
+              <button type="submit" class="btn btn-primary btn-submit">
+                <span id="btnText">Enviar Solicitação</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <p class="form-note">Resposta em até 4 horas · Sem compromisso</p>
+            </div>
+
+          </form>
+
+          <div class="form-success" id="formSuccess">
+            <div class="success-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="#00d4ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Mensagem recebida!</h3>
+            <p>Vou analisar e responder em até 4 horas com uma proposta detalhada.</p>
+          </div>
+        </div>
+
+        <!-- INFO -->
+        <div class="contact-info">
+
+          <!-- Tempo de resposta -->
+          <div class="info-block reveal reveal-delay-1">
+            <div class="info-label">Tempo de resposta</div>
+            <div class="info-value">Até 4 horas</div>
+            <div class="info-desc">Você recebe uma proposta detalhada com escopo, prazo e valor. Sem negociação em cima da hora.</div>
+          </div>
+
+          <!-- WhatsApp -->
+          <div class="wa-block reveal reveal-delay-2">
+            <div class="wa-top">
+              <div class="wa-icon">
+                <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </div>
+              <div>
+                <div class="wa-title">Prefere pelo WhatsApp?</div>
+                <div class="wa-sub">Resposta ainda mais rápida</div>
+              </div>
+            </div>
+            <div class="wa-desc">Me manda uma mensagem direta. É mais rápido para tirar dúvidas antes de fechar.</div>
+            <a href="https://wa.me/5511999999999?text=Olá!%20Vim%20pelo%20site%20da%20Vektor%20e%20gostaria%20de%20solicitar%20um%20orçamento." target="_blank" class="wa-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Falar no WhatsApp
+            </a>
+          </div>
+
+          <!-- Serviços quick reference -->
+          <div class="services-quick reveal reveal-delay-3">
+            <div class="services-quick-title">Referência de preços</div>
+            <ul class="service-quick-list">
+              <li><span>Landing Page</span><span class="price">a partir de R$ 800</span></li>
+              <li><span>Site Institucional</span><span class="price">a partir de R$ 1.500</span></li>
+              <li><span>Automação</span><span class="price">a partir de R$ 500</span></li>
+              <li><span>Agente com IA</span><span class="price">a partir de R$ 1.500</span></li>
+            </ul>
+          </div>
+
+          <!-- Instagram / LinkedIn -->
+          <div class="info-block reveal reveal-delay-3">
+            <div class="info-label">Redes Sociais</div>
+            <div style="display:flex; flex-direction:column; gap:10px; margin-top:4px;">
+              <a href="https://instagram.com/vektor.dev" target="_blank" style="display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--muted2); font-size:13px; transition:color 0.2s;" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color=''">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                @vektor.dev
+              </a>
+              <a href="https://linkedin.com/company/vektor-dev" target="_blank" style="display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--muted2); font-size:13px; transition:color 0.2s;" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color=''">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 10v7M7 7v.5M11 17v-4a2 2 0 014 0v4M11 10v7"/></svg>
+                linkedin.com/company/vektor
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">
+      <svg width="20" height="20" viewBox="0 0 26 26" fill="none">
+        <rect x="0.75" y="0.75" width="24.5" height="24.5" rx="3" stroke="#00d4ff" stroke-width="1.2"/>
+        <path d="M6 18L10.5 8.5L15 14L18.5 8.5" stroke="#00d4ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="18.5" cy="8.5" r="1.8" fill="#0057ff"/>
+      </svg>
+      <span class="footer-wordmark">VEKTOR</span>
+    </a>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="servicos.html">Serviços</a></li>
+      <li><a href="portfolio.html">Portfólio</a></li>
+      <li><a href="contato.html">Contato</a></li>
+    </ul>
+    <span class="footer-copy">© 2026 Vektor</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/5511999999999?text=Olá!%20Vim%20pelo%20site%20da%20Vektor%20e%20quero%20saber%20mais." target="_blank" class="wa-float">
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+const cursor=document.querySelector('.cursor');
+const ring=document.querySelector('.cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+function animCursor(){cursor.style.left=mx+'px';cursor.style.top=my+'px';rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animCursor);}
+animCursor();
+
+function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}
+
+async function handleSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('btnText');
+  btn.textContent = 'Enviando...';
+  const form = e.target;
+  try {
+    const res = await fetch(form.action, {
+      method:'POST',
+      body: new FormData(form),
+      headers:{ 'Accept':'application/json' }
+    });
+    if(res.ok){
+      form.style.display='none';
+      document.getElementById('formSuccess').style.display='block';
+    } else {
+      btn.textContent='Erro ao enviar. Tente pelo WhatsApp.';
+    }
+  } catch(err){
+    btn.textContent='Erro. Use o WhatsApp abaixo.';
+  }
+}
+
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

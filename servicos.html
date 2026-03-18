@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serviços — Vektor</title>
+<meta name="description" content="Landing pages, sites, automações e agentes com IA. Preços claros, escopo definido, entrega real.">
+<link rel="stylesheet" href="style.css">
+<style>
+/* PAGE HEADER */
+.page-header {
+  padding: 80px 0 72px;
+  border-bottom: 1px solid var(--border);
+}
+.page-header .s-title { font-size: clamp(36px, 5vw, 64px); }
+
+/* PRICING TABLE */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  margin-top: 56px;
+}
+
+.pricing-card {
+  background: var(--panel);
+  padding: 48px 40px;
+  position: relative;
+  display: flex; flex-direction: column;
+}
+
+.pricing-card.featured {
+  background: var(--panel2);
+  border-top: 2px solid var(--accent);
+}
+
+.featured-badge {
+  position: absolute; top: -1px; right: 40px;
+  background: var(--accent);
+  color: var(--black);
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 4px 12px;
+}
+
+.pc-tag {
+  font-family: var(--mono); font-size: 9px;
+  color: var(--muted); letter-spacing: 0.18em;
+  text-transform: uppercase; margin-bottom: 20px;
+}
+
+.pc-name {
+  font-family: var(--mono); font-size: 22px;
+  font-weight: 700; color: var(--white);
+  margin-bottom: 8px;
+}
+
+.pc-price {
+  font-family: var(--mono);
+  margin-bottom: 24px;
+}
+.pc-price .from {
+  font-size: 11px; color: var(--muted);
+  letter-spacing: 0.12em; display: block;
+  margin-bottom: 2px;
+}
+.pc-price .value {
+  font-size: 36px; font-weight: 700;
+  color: var(--accent);
+}
+.pc-price .period {
+  font-size: 13px; color: var(--muted2);
+}
+
+.pc-desc {
+  font-size: 14px; color: var(--muted2);
+  line-height: 1.7; margin-bottom: 32px;
+}
+
+.pc-includes {
+  list-style: none; display: flex; flex-direction: column;
+  gap: 10px; margin-bottom: 40px; flex: 1;
+}
+.pc-includes li {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 13px; color: var(--muted2); line-height: 1.5;
+}
+.pc-includes li::before {
+  content: '';
+  width: 16px; height: 16px; flex-shrink: 0;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M2 5l2.5 2.5L8 3' stroke='%2300d4ff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") center no-repeat;
+  margin-top: 1px;
+}
+
+.pc-deadline {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.12em; color: var(--muted);
+  margin-bottom: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.pc-deadline span { color: var(--white); }
+
+/* ADD-ONS */
+.addons {
+  margin-top: 2px;
+  background: var(--panel);
+  padding: 40px;
+}
+.addons-title {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 28px;
+}
+.addons-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+}
+.addon-item {
+  background: var(--panel2); padding: 24px;
+}
+.addon-name {
+  font-family: var(--mono); font-size: 12px; font-weight: 700;
+  color: var(--white); margin-bottom: 6px;
+}
+.addon-desc { font-size: 12px; color: var(--muted2); line-height: 1.5; margin-bottom: 12px; }
+.addon-price {
+  font-family: var(--mono); font-size: 13px;
+  color: var(--accent);
+}
+
+/* FAQ */
+.faq { margin-top: 80px; }
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+.faq-q {
+  width: 100%; background: none; border: none;
+  text-align: left; padding: 24px 0;
+  font-family: var(--mono); font-size: 13px;
+  font-weight: 700; color: var(--white);
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+}
+.faq-q:hover { color: var(--accent); }
+.faq-icon { font-size: 18px; color: var(--accent); flex-shrink: 0; transition: transform 0.25s; }
+.faq-a {
+  font-size: 14px; color: var(--muted2); line-height: 1.7;
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+}
+.faq-a.open { max-height: 200px; padding-bottom: 24px; }
+.faq-q.open .faq-icon { transform: rotate(45deg); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .pricing-grid { grid-template-columns: 1fr; }
+  .addons-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .addons-grid { grid-template-columns: 1fr; }
+  .pricing-card { padding: 36px 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg viewBox="0 0 26 26" fill="none">
+        <rect x="0.75" y="0.75" width="24.5" height="24.5" rx="3" stroke="#00d4ff" stroke-width="1.2"/>
+        <path d="M6 18L10.5 8.5L15 14L18.5 8.5" stroke="#00d4ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="18.5" cy="8.5" r="1.8" fill="#0057ff"/>
+      </svg>
+      <span class="nav-wordmark">VEKTOR</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="servicos.html" class="active">Serviços</a></li>
+      <li><a href="portfolio.html">Portfólio</a></li>
+      <li><a href="contato.html">Contato</a></li>
+      <li><a href="contato.html" class="nav-cta">Fale Comigo</a></li>
+    </ul>
+    <div class="nav-toggle" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<main>
+  <div class="page-header">
+    <div class="container">
+      <div class="s-label reveal">Serviços e Preços</div>
+      <h1 class="s-title reveal">Preço claro.<br>Entrega real.</h1>
+      <p class="s-subtitle reveal" style="margin-top:16px;">Sem orçamento surpresa. Cada serviço tem escopo definido e valor fixo. Você sabe exatamente o que vai receber antes de assinar.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+
+      <div class="pricing-grid">
+
+        <!-- Landing Page -->
+        <div class="pricing-card reveal">
+          <div class="pc-tag">01 · Entrega em 48–72h</div>
+          <div class="pc-name">Landing Page</div>
+          <div class="pc-price">
+            <span class="from">a partir de</span>
+            <span class="value">R$ 800</span>
+          </div>
+          <div class="pc-desc">Página única com foco em conversão. Ideal para lançamentos, promoções, serviços pontuais ou negócios que precisam de presença rápida.</div>
+          <ul class="pc-includes">
+            <li>Design personalizado na identidade da sua marca</li>
+            <li>Seção hero, serviços, depoimentos e CTA</li>
+            <li>Botão integrado ao WhatsApp</li>
+            <li>Formulário de contato funcional</li>
+            <li>100% responsivo (mobile/tablet/desktop)</li>
+            <li>Configuração de domínio inclusa</li>
+            <li>30 dias de suporte após entrega</li>
+          </ul>
+          <div class="pc-deadline">Prazo de entrega: <span>48 a 72 horas</span></div>
+          <a href="contato.html" class="btn btn-outline">Solicitar orçamento</a>
+        </div>
+
+        <!-- Site Institucional -->
+        <div class="pricing-card featured reveal reveal-delay-1">
+          <div class="featured-badge">Mais solicitado</div>
+          <div class="pc-tag">02 · Entrega em 7–10 dias</div>
+          <div class="pc-name">Site Institucional</div>
+          <div class="pc-price">
+            <span class="from">a partir de</span>
+            <span class="value">R$ 1.500</span>
+          </div>
+          <div class="pc-desc">Site completo para empresas, freelancers e prestadores de serviço. Multi-página, profissional e otimizado para aparecer no Google.</div>
+          <ul class="pc-includes">
+            <li>Até 5 páginas (Home, Serviços, Sobre, Blog, Contato)</li>
+            <li>Design exclusivo, não é template</li>
+            <li>SEO básico configurado</li>
+            <li>Google Analytics integrado</li>
+            <li>Formulário de contato + WhatsApp</li>
+            <li>Mapa e informações de localização</li>
+            <li>100% responsivo</li>
+            <li>Configuração de domínio e hospedagem</li>
+            <li>30 dias de suporte após entrega</li>
+          </ul>
+          <div class="pc-deadline">Prazo de entrega: <span>7 a 10 dias úteis</span></div>
+          <a href="contato.html" class="btn btn-primary">Solicitar orçamento</a>
+        </div>
+
+        <!-- Automação -->
+        <div class="pricing-card reveal">
+          <div class="pc-tag">03 · Prazo conforme escopo</div>
+          <div class="pc-name">Automação</div>
+          <div class="pc-price">
+            <span class="from">a partir de</span>
+            <span class="value">R$ 500</span>
+          </div>
+          <div class="pc-desc">Elimine tarefas manuais repetitivas. Conecte sistemas, crie fluxos automáticos, receba notificações sem intervenção humana.</div>
+          <ul class="pc-includes">
+            <li>Levantamento e mapeamento do processo atual</li>
+            <li>Integração entre sistemas via API ou webhook</li>
+            <li>Notificações automáticas (e-mail, WhatsApp, Slack)</li>
+            <li>Formulários conectados a planilhas e CRMs</li>
+            <li>Documentação do fluxo entregue</li>
+            <li>Treinamento para uso</li>
+          </ul>
+          <div class="pc-deadline">Prazo: <span>definido por escopo</span></div>
+          <a href="contato.html" class="btn btn-outline">Solicitar orçamento</a>
+        </div>
+
+        <!-- Agente IA -->
+        <div class="pricing-card reveal reveal-delay-1">
+          <div class="pc-tag">04 · Prazo conforme escopo</div>
+          <div class="pc-name">Agente com IA</div>
+          <div class="pc-price">
+            <span class="from">a partir de</span>
+            <span class="value">R$ 1.500</span>
+          </div>
+          <div class="pc-desc">IA que funciona para o seu negócio. Atendimento automatizado, triagem de clientes, análise de documentos — treinado para a sua realidade.</div>
+          <ul class="pc-includes">
+            <li>Diagnóstico do caso de uso ideal</li>
+            <li>Agente treinado com dados do seu negócio</li>
+            <li>Integração com WhatsApp, site ou sistema</li>
+            <li>Painel de acompanhamento de conversas</li>
+            <li>Ajuste de tom e comportamento do agente</li>
+            <li>Documentação e treinamento da equipe</li>
+          </ul>
+          <div class="pc-deadline">Prazo: <span>definido por escopo</span></div>
+          <a href="contato.html" class="btn btn-outline">Solicitar orçamento</a>
+        </div>
+
+      </div>
+
+      <!-- ADD-ONS -->
+      <div class="addons reveal">
+        <div class="addons-title">Add-ons disponíveis</div>
+        <div class="addons-grid">
+          <div class="addon-item">
+            <div class="addon-name">Manutenção Mensal</div>
+            <div class="addon-desc">Atualizações de conteúdo, backup e monitoramento mensal do site.</div>
+            <div class="addon-price">R$ 200/mês</div>
+          </div>
+          <div class="addon-item">
+            <div class="addon-name">Copywriting</div>
+            <div class="addon-desc">Criação dos textos e chamadas persuasivas para o site ou landing page.</div>
+            <div class="addon-price">R$ 300</div>
+          </div>
+          <div class="addon-item">
+            <div class="addon-name">Identidade Visual</div>
+            <div class="addon-desc">Logo, paleta de cores e guia de marca básico para novos negócios.</div>
+            <div class="addon-price">R$ 600</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="faq reveal">
+        <div class="s-label" style="margin-bottom:32px;">Dúvidas frequentes</div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Preciso pagar tudo adiantado?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">Não. O padrão é 50% na aprovação da proposta e 50% na entrega. Para projetos maiores, podemos combinar parcelas mensais.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            E se eu precisar de algo fora do escopo?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">Qualquer item fora do escopo acordado é tratado como nova demanda, com orçamento separado. Nunca surpresa na fatura final.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Você cria o conteúdo (textos e imagens) do site?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">O conteúdo é fornecido pelo cliente. Se precisar de apoio na criação de textos, o serviço de copywriting pode ser adicionado.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            O site fica hospedado onde?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">Recomendo Vercel ou Netlify (grátis para sites estáticos) ou HostGator/Locaweb para sites com backend. Configuração inclusa no serviço.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Posso pedir alterações durante o desenvolvimento?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">Sim. Incluo até 2 rodadas de revisão. Alterações pequenas (texto, cor, imagem) são ajustadas sem custo adicional.</div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section style="padding: 80px 0; border-top: 1px solid var(--border);">
+    <div class="container" style="text-align:center;">
+      <h2 class="s-title reveal" style="margin-bottom:16px;">Tem um projeto em mente?</h2>
+      <p class="s-subtitle reveal" style="margin: 0 auto 36px; text-align:center;">Me conta o que você precisa. Orçamento em até 4 horas.</p>
+      <a href="contato.html" class="btn btn-primary reveal">Solicitar Orçamento</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">
+      <svg width="20" height="20" viewBox="0 0 26 26" fill="none">
+        <rect x="0.75" y="0.75" width="24.5" height="24.5" rx="3" stroke="#00d4ff" stroke-width="1.2"/>
+        <path d="M6 18L10.5 8.5L15 14L18.5 8.5" stroke="#00d4ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="18.5" cy="8.5" r="1.8" fill="#0057ff"/>
+      </svg>
+      <span class="footer-wordmark">VEKTOR</span>
+    </a>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="servicos.html">Serviços</a></li>
+      <li><a href="portfolio.html">Portfólio</a></li>
+      <li><a href="contato.html">Contato</a></li>
+    </ul>
+    <span class="footer-copy">© 2026 Vektor</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/5511999999999?text=Olá!%20Vim%20pelo%20site%20da%20Vektor%20e%20quero%20saber%20mais." target="_blank" class="wa-float">
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+const cursor = document.querySelector('.cursor');
+const ring = document.querySelector('.cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+function animCursor(){cursor.style.left=mx+'px';cursor.style.top=my+'px';rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animCursor);}
+animCursor();
+
+function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}
+
+function toggleFaq(btn){
+  const a=btn.nextElementSibling;
+  a.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
