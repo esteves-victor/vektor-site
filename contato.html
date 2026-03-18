@@ -5,7 +5,376 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contato — Vektor</title>
 <meta name="description" content="Me conta o projeto. Respondo em até 4 horas com uma proposta clara.">
-<link rel="stylesheet" href="style.css">
+<style>
+/* ─── VEKTOR · Global Styles ─────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --black:   #080808;
+  --dark:    #111111;
+  --panel:   #161616;
+  --panel2:  #1c1c1c;
+  --border:  #242424;
+  --border2: #2e2e2e;
+  --white:   #efefef;
+  --muted:   #5a5a5a;
+  --muted2:  #888888;
+  --accent:  #00d4ff;
+  --blue:    #0057ff;
+  --mono:    'Space Mono', monospace;
+  --sans:    'DM Sans', sans-serif;
+  --nav-h:   64px;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.65;
+  min-height: 100vh;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ─── CURSOR ─── */
+.cursor {
+  width: 8px; height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease, opacity 0.15s;
+  transform: translate(-50%, -50%);
+}
+.cursor-ring {
+  width: 28px; height: 28px;
+  border: 1px solid rgba(0,212,255,0.4);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s linear, width 0.2s, height 0.2s, border-color 0.2s;
+}
+body:has(a:hover) .cursor-ring,
+body:has(button:hover) .cursor-ring {
+  width: 44px; height: 44px;
+  border-color: rgba(0,212,255,0.7);
+}
+
+/* ─── GRID TEXTURE ─── */
+.grid-bg {
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 44px 44px;
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  background: rgba(8,8,8,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  z-index: 100;
+  display: flex; align-items: center;
+}
+
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 40px;
+  width: 100%;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.nav-logo svg { width: 26px; height: 26px; }
+.nav-wordmark {
+  font-family: var(--mono);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.08em;
+}
+
+.nav-links {
+  display: flex; align-items: center; gap: 4px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted2);
+  text-decoration: none;
+  padding: 8px 14px;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: 4px; left: 14px; right: 14px;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transition: transform 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after,
+.nav-links a.active::after { transform: scaleX(1); }
+.nav-links a.active { color: var(--white); }
+
+.nav-cta {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--black) !important;
+  background: var(--accent);
+  padding: 9px 18px !important;
+  text-decoration: none;
+  transition: background 0.2s !important;
+}
+.nav-cta:hover { background: var(--white) !important; color: var(--black) !important; }
+.nav-cta::after { display: none !important; }
+
+/* ─── HAMBURGER MOBILE ─── */
+.nav-toggle {
+  display: none;
+  flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 8px;
+}
+.nav-toggle span {
+  display: block; width: 22px; height: 1.5px;
+  background: var(--white);
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+/* ─── MAIN WRAPPER ─── */
+main {
+  position: relative; z-index: 1;
+  padding-top: var(--nav-h);
+}
+
+/* ─── SECTIONS ─── */
+.section { padding: 100px 0; }
+.section-sm { padding: 64px 0; }
+
+.container {
+  max-width: 1200px; margin: 0 auto; padding: 0 40px;
+}
+
+/* ─── SECTION LABEL ─── */
+.s-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.s-label::before {
+  content: '';
+  display: block; width: 24px; height: 1px;
+  background: var(--accent);
+}
+
+.s-title {
+  font-family: var(--mono);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.s-subtitle {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--muted2);
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+/* ─── DIVIDER ─── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+/* ─── BUTTONS ─── */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 28px;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--black);
+}
+.btn-primary:hover {
+  background: var(--white);
+  color: var(--black);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid var(--border2);
+}
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--muted2);
+  padding-left: 0; padding-right: 0;
+}
+.btn-ghost:hover { color: var(--accent); }
+.btn-ghost svg { transition: transform 0.2s; }
+.btn-ghost:hover svg { transform: translateX(4px); }
+
+/* ─── WHATSAPP FLOAT ─── */
+.wa-float {
+  position: fixed;
+  bottom: 32px; right: 32px;
+  z-index: 200;
+  width: 52px; height: 52px;
+  background: #25d366;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.wa-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(37,211,102,0.5);
+}
+.wa-float svg { width: 26px; height: 26px; }
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--border);
+  position: relative; z-index: 1;
+}
+
+.footer-inner {
+  max-width: 1200px; margin: 0 auto; padding: 48px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+}
+
+.footer-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.footer-wordmark {
+  font-family: var(--mono);
+  font-size: 14px; font-weight: 700;
+  color: var(--white);
+}
+
+.footer-links {
+  display: flex; gap: 24px; list-style: none; flex-wrap: wrap;
+}
+.footer-links a {
+  font-family: var(--mono);
+  font-size: 10px; letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--accent); }
+
+.footer-copy {
+  font-family: var(--mono);
+  font-size: 10px; color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+/* ─── SCROLL ANIMATIONS ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ─── TAG ─── */
+.tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9px; letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1px solid var(--border2);
+  color: var(--muted2);
+}
+.tag.accent { border-color: var(--accent); color: var(--accent); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  .container { padding: 0 24px; }
+  .section { padding: 72px 0; }
+  .nav-inner { padding: 0 24px; }
+  .footer-inner { padding: 32px 24px; }
+
+  .nav-links { display: none; flex-direction: column; gap: 0; }
+  .nav-links.open {
+    display: flex;
+    position: fixed;
+    top: var(--nav-h); left: 0; right: 0;
+    background: rgba(8,8,8,0.98);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 0 24px;
+  }
+  .nav-links.open a { padding: 14px 24px; }
+  .nav-toggle { display: flex; }
+
+  .wa-float { bottom: 20px; right: 20px; }
+
+  body { cursor: auto; }
+  .cursor, .cursor-ring { display: none; }
+}
+
+</style>
 <style>
 /* PAGE HEADER */
 .page-header {
@@ -331,7 +700,7 @@
               </div>
             </div>
             <div class="wa-desc">Me manda uma mensagem direta. É mais rápido para tirar dúvidas antes de fechar.</div>
-            <a href="https://wa.me/5511999999999?text=Olá!%20Vim%20pelo%20site%20da%20Vektor%20e%20gostaria%20de%20solicitar%20um%20orçamento." target="_blank" class="wa-btn">
+            <a href="https://wa.me/5511953914167?text=Olá!%20Vim%20pelo%20site%20da%20Vektor%20e%20gostaria%20de%20solicitar%20um%20orçamento." target="_blank" class="wa-btn">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               Falar no WhatsApp
             </a>
@@ -390,7 +759,7 @@
   </div>
 </footer>
 
-<a href="https://wa.me/5511999999999?text=Olá!%20Vim%20pelo%20site%20da%20Vektor%20e%20quero%20saber%20mais." target="_blank" class="wa-float">
+<a href="https://wa.me/5511953914167?text=Olá!%20Vim%20pelo%20site%20da%20Vektor%20e%20quero%20saber%20mais." target="_blank" class="wa-float">
   <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
