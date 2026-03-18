@@ -376,6 +376,35 @@ footer {
 
 </style>
 <style>
+
+.wa-service-btn {
+  display: flex; align-items: center; justify-content: space-between;
+  background: #0d1f14;
+  border: 1px solid #1a3a22;
+  padding: 20px 24px;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+  gap: 16px;
+}
+.wa-service-btn:hover { background: #122a1a; border-color: #25d366; }
+.wsb-left { display: flex; align-items: center; gap: 16px; }
+.wsb-tag {
+  font-family: var(--mono); font-size: 10px;
+  color: #25d366; letter-spacing: 0.15em;
+  min-width: 24px;
+}
+.wsb-name {
+  font-family: var(--mono); font-size: 13px;
+  font-weight: 700; color: var(--white); margin-bottom: 3px;
+}
+.wsb-desc { font-size: 12px; color: var(--muted2); }
+.wsb-price {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 11px;
+  color: #25d366; white-space: nowrap;
+  flex-shrink: 0;
+}
+
 /* PAGE HEADER */
 .page-header {
   padding: 80px 0 72px;
@@ -616,65 +645,81 @@ footer {
 
         <!-- FORM -->
         <div class="contact-form-wrap reveal">
-          <div class="form-title">Solicitar Orçamento</div>
+          <div class="form-title">Escolha o serviço e fale comigo</div>
+          <p style="font-size:14px;color:var(--muted2);margin-bottom:32px;line-height:1.7;">Clica no serviço que você precisa. Abre direto no WhatsApp com a mensagem já preenchida — é só enviar.</p>
 
-          <!--
-            INSTRUÇÃO: Troque o action abaixo pelo seu endpoint do Formspree.
-            1. Acesse https://formspree.io e crie uma conta gratuita
-            2. Crie um novo Form e copie o endpoint (https://formspree.io/f/XXXXXXXX)
-            3. Cole no lugar do action abaixo
-          -->
-          <form id="contactForm" action="https://formspree.io/f/SEU_ID_AQUI" method="POST" onsubmit="handleSubmit(event)">
+          <div style="display:flex;flex-direction:column;gap:8px;">
 
-            <div class="form-row">
-              <div class="form-group">
-                <label>Nome</label>
-                <input type="text" name="nome" placeholder="Seu nome" required>
+            <a href="https://wa.me/5511953914167?text=Olá!%20Vim%20pelo%20site%20da%20Vektor%20e%20tenho%20interesse%20em%20uma%20*Landing%20Page*%20(a%20partir%20de%20R%24%20800).%20Pode%20me%20passar%20mais%20informações%3F" target="_blank" class="wa-service-btn">
+              <div class="wsb-left">
+                <div class="wsb-tag">01</div>
+                <div>
+                  <div class="wsb-name">Landing Page</div>
+                  <div class="wsb-desc">Página de conversão · Entrega em 48–72h</div>
+                </div>
               </div>
-              <div class="form-group">
-                <label>WhatsApp</label>
-                <input type="tel" name="whatsapp" placeholder="(11) 99999-9999">
+              <div class="wsb-price">
+                <span>A partir de R$ 800</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               </div>
-            </div>
+            </a>
 
-            <div class="form-group">
-              <label>E-mail</label>
-              <input type="email" name="email" placeholder="seu@email.com" required>
-            </div>
+            <a href="https://wa.me/5511953914167?text=Olá!%20Vim%20pelo%20site%20da%20Vektor%20e%20tenho%20interesse%20em%20um%20*Site%20Institucional*%20(a%20partir%20de%20R%24%201.500).%20Pode%20me%20passar%20mais%20informações%3F" target="_blank" class="wa-service-btn">
+              <div class="wsb-left">
+                <div class="wsb-tag">02</div>
+                <div>
+                  <div class="wsb-name">Site Institucional</div>
+                  <div class="wsb-desc">Multi-página · SEO · Responsivo</div>
+                </div>
+              </div>
+              <div class="wsb-price">
+                <span>A partir de R$ 1.500</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </div>
+            </a>
 
-            <div class="form-group">
-              <label>Serviço de interesse</label>
-              <select name="servico" required>
-                <option value="" disabled selected>Selecione um serviço</option>
-                <option value="landing">Landing Page (a partir de R$ 800)</option>
-                <option value="site">Site Institucional (a partir de R$ 1.500)</option>
-                <option value="automacao">Automação (a partir de R$ 500)</option>
-                <option value="ia">Agente com IA (a partir de R$ 1.500)</option>
-                <option value="outro">Outro / Não sei ainda</option>
-              </select>
-            </div>
+            <a href="https://wa.me/5511953914167?text=Olá!%20Vim%20pelo%20site%20da%20Vektor%20e%20tenho%20interesse%20em%20*Automação*%20(a%20partir%20de%20R%24%20500).%20Pode%20me%20passar%20mais%20informações%3F" target="_blank" class="wa-service-btn">
+              <div class="wsb-left">
+                <div class="wsb-tag">03</div>
+                <div>
+                  <div class="wsb-name">Automação</div>
+                  <div class="wsb-desc">Integrações e fluxos automáticos</div>
+                </div>
+              </div>
+              <div class="wsb-price">
+                <span>A partir de R$ 500</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </div>
+            </a>
 
-            <div class="form-group">
-              <label>Conte sobre o projeto</label>
-              <textarea name="mensagem" placeholder="O que você precisa? Qual o objetivo do projeto? Tem prazo ou orçamento em mente?" required></textarea>
-            </div>
+            <a href="https://wa.me/5511953914167?text=Olá!%20Vim%20pelo%20site%20da%20Vektor%20e%20tenho%20interesse%20em%20um%20*Agente%20com%20IA*%20(a%20partir%20de%20R%24%201.500).%20Pode%20me%20passar%20mais%20informações%3F" target="_blank" class="wa-service-btn">
+              <div class="wsb-left">
+                <div class="wsb-tag">04</div>
+                <div>
+                  <div class="wsb-name">Agente com IA</div>
+                  <div class="wsb-desc">Atendimento e automação inteligente</div>
+                </div>
+              </div>
+              <div class="wsb-price">
+                <span>A partir de R$ 1.500</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </div>
+            </a>
 
-            <div class="form-submit">
-              <button type="submit" class="btn btn-primary btn-submit">
-                <span id="btnText">Enviar Solicitação</span>
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-              <p class="form-note">Resposta em até 4 horas · Sem compromisso</p>
-            </div>
+            <a href="https://wa.me/5511953914167?text=Olá!%20Vim%20pelo%20site%20da%20Vektor%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto.%20Pode%20me%20ajudar%3F" target="_blank" class="wa-service-btn" style="background:var(--panel2);border-color:var(--border2);">
+              <div class="wsb-left">
+                <div class="wsb-tag" style="color:var(--muted2);">?</div>
+                <div>
+                  <div class="wsb-name">Não sei ainda</div>
+                  <div class="wsb-desc">Quero conversar sobre meu projeto</div>
+                </div>
+              </div>
+              <div class="wsb-price" style="color:var(--muted2);">
+                <span>Falar agora</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </div>
+            </a>
 
-          </form>
-
-          <div class="form-success" id="formSuccess">
-            <div class="success-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="#00d4ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <h3>Mensagem recebida!</h3>
-            <p>Vou analisar e responder em até 4 horas com uma proposta detalhada.</p>
           </div>
         </div>
 
