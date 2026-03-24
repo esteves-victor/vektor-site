@@ -816,20 +816,19 @@ footer {
   </section>
   
   <!--CALCULADORA -->
-  <section class="tools-section">
+  
+<section class="tools-section">
   <div class="container">
-
-    <div class="section-label">Ferramentas gratuitas</div>
-
     <div class="tools-card">
       <div class="tools-card-inner">
+ 
         <div class="tools-card-content">
-          <div class="tools-tag">Calculadora · Agente IA</div>
+          <div class="tools-tag">Agente IA · WhatsApp</div>
           <h2 class="tools-card-title">Quanto custa um Agente de IA<br>no seu WhatsApp?</h2>
           <p class="tools-card-desc">
             Servidor, modelo de linguagem, API do WhatsApp, banco de dados —
-            cada peça tem um preço. Calculamos tudo para você em 2 minutos.
-            Grátis, sem cadastro obrigatório.
+            cada peça tem um preço. Calcule a estimativa real do seu projeto
+            em 2 minutos, linha por linha.
           </p>
           <div class="tools-card-items">
             <div class="tools-item">
@@ -845,10 +844,11 @@ footer {
               Custo total + custo por conversa
             </div>
           </div>
-          <a href="https://calculadora.vektordev.com.br/" target="_blank" class="btn btn-primary tools-btn">
+          <a href="https://calculadora.vektordev.com.br/" target="_blank" class="tools-btn">
             Calcular agora →
           </a>
         </div>
+ 
         <div class="tools-card-visual">
           <div class="tools-preview">
             <div class="tools-preview-label">Estimativa mensal · ferramentas</div>
@@ -859,24 +859,204 @@ footer {
                 <span>Servidor</span><span>R$ 22</span>
               </div>
               <div class="tools-preview-row">
-                <span>IA</span><span class="cyan">R$ 25</span>
+                <span>IA</span><span class="tpr-cyan">R$ 25</span>
               </div>
               <div class="tools-preview-row">
-                <span>WhatsApp API</span><span class="muted">Incluso</span>
+                <span>WhatsApp API</span><span class="tpr-muted">Incluso</span>
               </div>
-              <div class="tools-preview-row total-row">
-                <span>Total / mês</span><span class="cyan">R$ 47</span>
+              <div class="tools-preview-row tpr-total">
+                <span>Total / mês</span><span class="tpr-cyan">R$ 47</span>
               </div>
             </div>
           </div>
         </div>
+ 
       </div>
     </div>
-
   </div>
 </section>
-
+ 
 <style>
+.tools-section {
+  padding: 100px 0;
+}
+.tools-card {
+  background: #111;
+  border: 1px solid #1e1e1e;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+}
+.tools-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,.25), transparent);
+}
+.tools-card-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+@media (max-width: 768px) {
+  .tools-card-inner { grid-template-columns: 1fr; }
+}
+.tools-card-content {
+  padding: 52px 48px;
+}
+@media (max-width: 768px) {
+  .tools-card-content { padding: 36px 28px; }
+}
+.tools-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: #00d4ff;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  background: rgba(0,212,255,.07);
+  border: 1px solid rgba(0,212,255,.18);
+  border-radius: 100px;
+  padding: 5px 14px;
+  margin-bottom: 22px;
+}
+.tools-tag::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #00d4ff;
+  animation: toolsPulse 2s ease infinite;
+}
+@keyframes toolsPulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+.tools-card-title {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 700;
+  color: #f0f0f0;
+  line-height: 1.25;
+  margin-bottom: 16px;
+}
+.tools-card-desc {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.75;
+  margin-bottom: 24px;
+}
+.tools-card-items {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.tools-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #888;
+}
+.tools-item-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #00d4ff;
+  flex-shrink: 0;
+}
+.tools-btn {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  background: #0057ff !important;
+  color: #fff !important;
+  font-family: 'Space Mono', monospace !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: .04em;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none !important;
+  border: none;
+  cursor: pointer;
+  transition: background .15s, transform .15s, box-shadow .15s;
+}
+.tools-btn:hover {
+  background: #1668ff !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0,87,255,.35);
+}
+.tools-card-visual {
+  background: #0d0d0d;
+  border-left: 1px solid #1e1e1e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 40px;
+}
+@media (max-width: 768px) {
+  .tools-card-visual {
+    border-left: none;
+    border-top: 1px solid #1e1e1e;
+    padding: 32px 28px;
+  }
+}
+.tools-preview {
+  width: 100%;
+  max-width: 280px;
+  background: #131313;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 24px;
+}
+.tools-preview-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: #444;
+  margin-bottom: 8px;
+}
+.tools-preview-total {
+  font-family: 'Space Mono', monospace;
+  font-size: 44px;
+  font-weight: 700;
+  color: #00d4ff;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.tools-preview-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: #444;
+  margin-bottom: 20px;
+}
+.tools-preview-rows {
+  border-top: 1px solid #1e1e1e;
+}
+.tools-preview-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #1a1a1a;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  color: #555;
+}
+.tools-preview-row .tpr-cyan { color: #00d4ff; font-weight: 700; }
+.tools-preview-row .tpr-muted { color: #333; }
+.tools-preview-row.tpr-total {
+  border-bottom: none;
+  border-top: 1px solid #252525;
+  padding-top: 14px;
+  margin-top: 4px;
+  color: #888;
+  font-weight: 700;
+}
+.tools-preview-row.tpr-total .tpr-cyan { font-size: 16px; }
+</style>
 /* ── TOOLS SECTION ───────────────────────────────────────── */
 .tools-section {
   padding: 100px 0;
