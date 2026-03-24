@@ -669,25 +669,30 @@ footer {
       </div>
 
       <!-- Calculadora -->
-      <div class="calc-banner">
+      <!-- ============================================================
+     INSERIR no servicos.html
+     POSIÇÃO: após o card "04 · Agente com IA"
+              e antes da seção "Add-ons disponíveis"
+     ============================================================ -->
+
+<div class="calc-banner">
   <div class="calc-banner-left">
-    <div class="calc-banner-tag">Ferramenta gratuita</div>
+    <div class="calc-banner-tag">Calculadora · Agente IA</div>
     <h3 class="calc-banner-title">Quer saber o custo real antes de contratar?</h3>
     <p class="calc-banner-desc">
-      Use a calculadora e veja quanto custa um Agente de IA rodando no seu WhatsApp —
+      Calcule quanto custa um Agente de IA rodando no seu WhatsApp —
       servidor, modelo de linguagem, API e banco de dados, linha por linha.
     </p>
   </div>
   <div class="calc-banner-right">
-    <a href="https://calculadora.vektordev.com.br/" target="_blank" class="btn btn-primary">
+    <a href="https://calculadora.vektordev.com.br/" target="_blank" class="calc-btn">
       Calcular agora →
     </a>
-    <div class="calc-banner-hint">Grátis · 2 minutos · sem cadastro</div>
+    <div class="calc-banner-hint">Estimativa em 2 minutos</div>
   </div>
 </div>
 
 <style>
-/* ── CALC BANNER (servicos.html) ─────────────────────────── */
 .calc-banner {
   background: #111;
   border: 1px solid #1e1e1e;
@@ -730,6 +735,37 @@ footer {
   gap: 10px;
   flex-shrink: 0;
 }
+
+/* Botão autossuficiente — ignora herança do site */
+.calc-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #0057ff !important;
+  color: #fff !important;
+  font-family: 'Space Mono', monospace !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: .04em !important;
+  padding: 14px 28px !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  border: none !important;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .15s, transform .15s, box-shadow .15s;
+}
+.calc-btn:hover {
+  background: #1668ff !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0,87,255,.35);
+}
+.calc-btn:visited {
+  color: #fff !important;
+}
+
 .calc-banner-hint {
   font-family: 'Space Mono', monospace;
   font-size: 10px;
@@ -738,8 +774,20 @@ footer {
   text-transform: uppercase;
   white-space: nowrap;
 }
-</style>
 
+@media (max-width: 768px) {
+  .calc-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 28px 24px;
+  }
+  .calc-banner-right {
+    width: 100%;
+    align-items: flex-start;
+  }
+}
+</style>
+      
       <!-- ADD-ONS -->
       <div class="addons reveal">
         <div class="addons-title">Add-ons disponíveis</div>
